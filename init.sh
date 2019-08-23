@@ -10,4 +10,5 @@ done
 EACBASHLIB_ROOT="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 source "$EACBASHLIB_ROOT/bool.sh"
+source "$EACBASHLIB_ROOT/snap.sh"
 source "$EACBASHLIB_ROOT/speaker.sh"
