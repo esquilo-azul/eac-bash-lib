@@ -24,6 +24,25 @@ function template_apply() {
   cat "$out_tmp"
 }
 
+function template_dir_apply() {
+  SOURCE_ROOT="$1"
+  if [ $# -ge 2 ]; then
+    TARGET_ROOT="$2"
+  else
+    TARGET_ROOT=$(mktemp -d)
+  fi
+
+  for d in $(cd "$SOURCE_ROOT"; find -type d); do
+    >&2 mkdir -p "$TARGET_ROOT/$d"
+  done
+
+  for f in $(cd "$SOURCE_ROOT"; find -type f); do
+    template_apply "$SOURCE_ROOT/$f" > "$TARGET_ROOT/$f"
+  done
+
+  printf "$TARGET_ROOT\n"
+}
+
 function template_variables() {
   FILE="$1"
   PATTERN='[a-zA-Z][a-zA-Z0-9_]*'
