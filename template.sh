@@ -15,8 +15,7 @@ function template_apply() {
 
   for var in $(template_variables "$1"); do
     if [ -z ${!var+x} ]; then
-      >&2 echo "Variable \"$var\" is unset"
-      return 2
+      fatal_error "Variable \"$var\" is unset"
     fi
     sed -e "s|%%$var%%|${!var}|" "$in_tmp" > "$out_tmp"
     cp "$out_tmp" "$in_tmp"
