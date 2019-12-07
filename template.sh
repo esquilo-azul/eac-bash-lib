@@ -2,18 +2,24 @@ set -u
 set -e
 
 function template_apply() {
-  if [ ! -f "$1" ]; then
-    >&2 printf "\"$1\" does not exist or is not a file\n"
+  if [ $# -lt 1 ]; then
+    error "Usage:\n\ntemplate_apply <TEMPLATE_FILE>\n"
+    return 1
+  fi
+  local TEMPLATE_FILE="$1"
+
+  if [ ! -f "TEMPLATE_FILE" ]; then
+    error "\"TEMPLATE_FILE\" does not exist or is not a file\n"
     return 1
   fi
 
   out_tmp=$(mktemp)
   in_tmp=$(mktemp)
 
-  cp "$1" "$in_tmp" >&2
-  cp "$1" "$out_tmp" >&2
+  cp "TEMPLATE_FILE" "$in_tmp" >&2
+  cp "TEMPLATE_FILE" "$out_tmp" >&2
 
-  for var in $(template_variables "$1"); do
+  for var in $(template_variables "$TEMPLATE_FILE"); do
     if [ -z ${!var+x} ]; then
       fatal_error "Variable \"$var\" is unset"
     fi
