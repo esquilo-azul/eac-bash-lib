@@ -3,11 +3,17 @@ set -e
 
 function template_apply() {
   if [ $# -lt 1 ]; then
-    error "Usage:\n\ntemplate_apply <TEMPLATE_FILE>\n"
+    error "Usage:\n\ntemplate_apply <TEMPLATE_FILE> [<OUTPUT_FILE>='-'\n"
     error "\n\n<TEMPLATE_FILE> can be a file path or \"-\" (STDIN)\n"
+    error "\n\n<OUTPUT_FILE> can be a file path or \"-\" (STDOUT)\n"
     return 1
   fi
   local TEMPLATE_FILE="$1"
+
+  local OUTPUT_FILE='-'
+  if [ $# -ge 2 ]; then
+    OUTPUT_FILE="$2"
+  fi
 
   out_tmp=$(mktemp)
   in_tmp=$(mktemp)
@@ -31,7 +37,12 @@ function template_apply() {
     cp "$out_tmp" "$in_tmp"
   done
 
-  cat "$out_tmp"
+  if [ "$OUTPUT_FILE" == '-' ]; then
+    cat "$out_tmp"
+  else
+    mkdir -p "$(dirname "$OUTPUT_FILE")" >&2
+    cp "$out_tmp" "$OUTPUT_FILE" >&2
+  fi
 }
 
 function template_dir_apply() {
