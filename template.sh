@@ -96,7 +96,19 @@ function template_dir_apply() {
 }
 
 function template_variables() {
+  if [ $# -lt 1 ]; then
+    error "Usage:\n\ntemplate_variables <TEMPLATE_FILE>" \
+      "\n<TEMPLATE_FILE> should be a file path."
+    return 1
+  fi
+
   FILE="$1"
+
+  if [ ! -f "$FILE" ]; then
+    error "\"$FILE\" does not exist or is not a file"
+    return 2
+  fi
+
   PATTERN='[a-zA-Z][a-zA-Z0-9_]*'
   grep '%%'$PATTERN'%%' "$FILE" -o | grep "$PATTERN" -o
 }
