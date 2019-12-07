@@ -50,6 +50,32 @@ function template_apply() {
   fi
 }
 
+function template_diff() {
+  if [ $# -lt 2 ]; then
+    error "Usage: $0 <TEMPLATE_FILE> <OUTPUT_FILE>"
+    error "\n\n<TEMPLATE_FILE> can be a file path or \"-\" (STDIN)\n"
+    error "\n\n<OUTPUT_FILE> should be a file path\n"
+    return 1
+  fi
+
+  local TEMPLATE_FILE="$1"
+  local OUTPUT_FILE="$2"
+
+  if [ "$TEMPLATE_FILE" != '-' ] && [ ! -f "$TEMPLATE_FILE" ]; then
+    error "Template \"$TEMPLATE_FILE\" does not exist"
+    return 2
+  fi
+
+  if [ ! -f "$OUTPUT_FILE" ]; then
+    error "Output file \"$OUTPUT_FILE\" does not exist or is not a file"
+    return 3
+  fi
+
+  local INPUT_FILE="$(mktemp)"
+  template_apply "$TEMPLATE_FILE" "$INPUT_FILE" <&0
+  diff "$INPUT_FILE" "$OUTPUT_FILE" > /dev/null 2> /dev/null
+}
+
 function template_dir_apply() {
   SOURCE_ROOT="$1"
   if [ $# -ge 2 ]; then
