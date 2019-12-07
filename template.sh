@@ -4,20 +4,24 @@ set -e
 function template_apply() {
   if [ $# -lt 1 ]; then
     error "Usage:\n\ntemplate_apply <TEMPLATE_FILE>\n"
+    error "\n\n<TEMPLATE_FILE> can be a file path or \"-\" (STDIN)\n"
     return 1
   fi
   local TEMPLATE_FILE="$1"
 
-  if [ ! -f "TEMPLATE_FILE" ]; then
-    error "\"TEMPLATE_FILE\" does not exist or is not a file\n"
-    return 1
-  fi
-
   out_tmp=$(mktemp)
   in_tmp=$(mktemp)
 
-  cp "TEMPLATE_FILE" "$in_tmp" >&2
-  cp "TEMPLATE_FILE" "$out_tmp" >&2
+  if [ "$TEMPLATE_FILE" == '-' ]; then
+    >&2 cat <&0 > "$in_tmp"
+  else
+    if [ ! -f "$TEMPLATE_FILE" ]; then
+      error "Template file \"$TEMPLATE_FILE\" does not exist or is not a file\n"
+      return 2
+    fi
+    >&2 cp "$TEMPLATE_FILE" "$in_tmp"
+  fi
+  cp "$in_tmp" "$out_tmp" >&2
 
   for var in $(template_variables "$TEMPLATE_FILE"); do
     if [ -z ${!var+x} ]; then
