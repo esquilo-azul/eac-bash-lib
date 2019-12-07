@@ -19,6 +19,13 @@ function outerr() {
   done
 }
 
+# Outputs a error message.
+function error() {
+  outerr "${RED}Error: ${NC}"
+  outerr "$@"
+  outerr "\n"
+}
+
 function infom() {
   outerr "${YELLOW}$@${NC}\n"
 }
@@ -30,13 +37,12 @@ function infov() {
   outerr "\n"
 }
 
+# Outputs a error message and exit with error code.
 function fatal_error() {
   set -u
   set -e
 
-  outerr "${RED}Error: ${NC}"
-  outerr "$@"
-  outerr "\n"
+  error "$@"
   exit 1
 }
 
