@@ -4,7 +4,7 @@ set -e
 function deb_assert_installed() {
   INSTALL=()
   for PKG in $@; do
-    if deb_installed "$PKG" ; then
+    if ! deb_installed "$PKG" ; then
       INSTALL+=("$PKG")
     fi
   done
