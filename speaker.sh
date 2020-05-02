@@ -15,7 +15,7 @@ function outerr() {
     else
       >&2 printf -- ' '
     fi
-    >&2 printf -- "$value"
+    >&2 printf -- '%b' "$value"
   done
 }
 
