@@ -7,3 +7,9 @@ function ruby_rvm_source() {
     . "$SOURCE_FILE"
   fi
 }
+
+function ruby_rvm_run() {
+  ruby_rvm_source
+  set +u
+  rvm "$@"
+}
