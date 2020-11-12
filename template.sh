@@ -3,7 +3,7 @@ set -e
 
 function template_apply() {
   if [ $# -lt 1 ]; then
-    error "Usage:\n\ntemplate_apply <TEMPLATE_FILE> [<OUTPUT_FILE>='-'\n"
+    error "Usage:\n\ntemplate_apply <TEMPLATE_FILE> [<OUTPUT_FILE>='-']\n"
     error "\n\n<TEMPLATE_FILE> can be a file path or \"-\" (STDIN)\n"
     error "\n\n<OUTPUT_FILE> can be a file path or \"-\" (STDOUT)\n"
     return 1
