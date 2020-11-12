@@ -1,3 +1,18 @@
+function cli_arg() {
+  if [ $# -lt 2 ]; then
+    fatal_error "Usage: ${FUNCNAME[0]} <POSITION> <DEFAULT_VALUE> [<ARGV>...]\n"
+  fi
+  local POSITION="$1"
+  shift
+  local DEFAULT_VALUE="$1"
+  shift
+  if [ $# -ge "$POSITION" ]; then
+    printf "%s\n" "${!POSITION}"
+  else
+    printf "%s\n" "$DEFAULT_VALUE"
+  fi
+}
+
 function cli_file_path_or_stdin() {
   local SOURCE_PATH="$1"
   if [ "$SOURCE_PATH" = '-' ]; then
