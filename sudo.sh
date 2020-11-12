@@ -1,6 +1,15 @@
 set -u
 set -e
 
+function sudoers_read() {
+  if [ $# -lt 1 ]; then
+    printf "Usage: ${FUNCNAME[0]} <SOURCE_FILE>"
+    return 1
+  fi
+
+  sudo cat "$1" 2> /dev/null
+}
+
 function sudoers_write() {
   if [ $# -lt 1 ]; then
     error "Usage: ${FUNCNAME[0]} <TARGET_FILE> [<SOURCE_FILE>='-']\n"
