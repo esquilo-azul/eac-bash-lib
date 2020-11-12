@@ -52,25 +52,14 @@ function template_apply() {
 
 function template_diff() {
   if [ $# -lt 2 ]; then
-    error "Usage: $0 <TEMPLATE_FILE> <OUTPUT_FILE>"
+    error "Usage:\n\template_diff <TEMPLATE_FILE> <OUTPUT_FILE>\n"
     error "\n\n<TEMPLATE_FILE> can be a file path or \"-\" (STDIN)\n"
-    error "\n\n<OUTPUT_FILE> should be a file path\n"
+    error "\n\n<OUTPUT_FILE> can be a file path or \"-\" (STDIN)\n"
     return 1
   fi
 
-  local TEMPLATE_FILE="$1"
-  local OUTPUT_FILE="$2"
-
-  if [ "$TEMPLATE_FILE" != '-' ] && [ ! -f "$TEMPLATE_FILE" ]; then
-    error "Template \"$TEMPLATE_FILE\" does not exist"
-    return 2
-  fi
-
-  if [ ! -f "$OUTPUT_FILE" ]; then
-    error "Output file \"$OUTPUT_FILE\" does not exist or is not a file"
-    return 3
-  fi
-
+  local TEMPLATE_FILE="$(cli_file_path_or_stdin "$1")"
+  local OUTPUT_FILE="$(cli_file_path_or_stdin "$2")"
   local INPUT_FILE="$(mktemp)"
   template_apply "$TEMPLATE_FILE" "$INPUT_FILE" <&0
   diff "$INPUT_FILE" "$OUTPUT_FILE" > /dev/null 2> /dev/null
