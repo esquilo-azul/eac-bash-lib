@@ -1,5 +1,6 @@
 set -u
 set -e
+set -o pipefail
 
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
