@@ -13,10 +13,14 @@ function outerr() {
     if [ -n "$first" ]; then
       first=''
     else
-      >&2 printf -- ' '
+      >&2 outout ' '
     fi
-    >&2 printf -- '%b' "$value"
+    >&2 outout "$value"
   done
+}
+
+function outout() {
+  printf -- '%b' "$1"
 }
 
 # Outputs a error message.
