@@ -26,6 +26,7 @@ function bool_r() {
   fi
   return 0
 }
+export -f bool_r
 
 function bool_s() {
   TRUE_VALUE='TRUE'
@@ -42,3 +43,4 @@ function bool_s() {
     printf "$FALSE_VALUE"
   fi
 }
+export -f bool_s

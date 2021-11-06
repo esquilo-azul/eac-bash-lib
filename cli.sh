@@ -12,6 +12,7 @@ function cli_arg() {
     printf "%s\n" "$DEFAULT_VALUE"
   fi
 }
+export -f cli_arg
 
 function cli_file_path_or_stdin() {
   local SOURCE_PATH="$1"
@@ -23,6 +24,7 @@ function cli_file_path_or_stdin() {
   fi
   printf "%s\n" "$SOURCE_PATH"
 }
+export -f cli_file_path_or_stdin
 
 function cli_file_path_or_stdout() {
   local TARGET_PATH="$1"
@@ -35,3 +37,4 @@ function cli_file_path_or_stdout() {
   fi
   printf "%s\n" "$TARGET_PATH"
 }
+export -f cli_file_path_or_stdout

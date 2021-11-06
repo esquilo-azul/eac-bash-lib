@@ -10,6 +10,7 @@ function snap_installed() {
     bool_s 'FALSE'
   fi
 }
+export -f snap_installed
 
 function snap_assert_installed() {
   TO_INSTALL=()
@@ -25,3 +26,4 @@ function snap_assert_installed() {
     infom "Installed"
   fi
 }
+export -f snap_assert_installed

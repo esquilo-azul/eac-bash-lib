@@ -49,6 +49,7 @@ function template_apply() {
     cp "$out_tmp" "$OUTPUT_FILE" >&2
   fi
 }
+export -f template_apply
 
 function template_diff() {
   if [ $# -lt 2 ]; then
@@ -64,6 +65,7 @@ function template_diff() {
   template_apply "$TEMPLATE_FILE" "$INPUT_FILE" <&0
   diff "$INPUT_FILE" "$OUTPUT_FILE" > /dev/null 2> /dev/null
 }
+export -f template_diff
 
 function template_dir_apply() {
   SOURCE_ROOT="$1"
@@ -83,6 +85,7 @@ function template_dir_apply() {
 
   printf "$TARGET_ROOT\n"
 }
+export -f template_dir_apply
 
 function template_variables() {
   if [ $# -lt 1 ]; then
@@ -101,3 +104,4 @@ function template_variables() {
   PATTERN='[a-zA-Z][a-zA-Z0-9_]*'
   grep '%%'$PATTERN'%%' "$FILE" -o | grep "$PATTERN" -o
 }
+export -f template_variables

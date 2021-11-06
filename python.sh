@@ -11,6 +11,7 @@ function python_assert_installed() {
     sudo pip install "${INSTALL[@]}"
   fi
 }
+export -f python_assert_installed
 
 function python_installed() {
   for PKG in $@; do
@@ -20,3 +21,4 @@ function python_installed() {
     fi
   done
 }
+export -f python_installed

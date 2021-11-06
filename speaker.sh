@@ -18,10 +18,12 @@ function outerr() {
     >&2 outout "$value"
   done
 }
+export -f outerr
 
 function outout() {
   printf -- '%b' "$1"
 }
+export -f outout
 
 # Outputs a error message.
 function error() {
@@ -29,10 +31,12 @@ function error() {
   outerr "$@"
   outerr "\n"
 }
+export -f error
 
 function infom() {
   outerr "${YELLOW}$@${NC}\n"
 }
+export -f infom
 
 function infov() {
   outerr "${CYAN}$1: ${NC}"
@@ -40,6 +44,7 @@ function infov() {
   outerr "$@"
   outerr "\n"
 }
+export -f infov
 
 # Outputs a error message and exit with error code.
 function fatal_error() {
@@ -49,7 +54,9 @@ function fatal_error() {
   error "$@"
   exit 1
 }
+export -f fatal_error
 
 function info_ok() {
   printf "${GREEN}$@${NC}\n"
 }
+export -f info_ok

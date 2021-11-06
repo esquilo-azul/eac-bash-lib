@@ -14,6 +14,7 @@ function deb_assert_installed() {
     sudo DEBIAN_FRONTEND=noninteractive apt-get -y install "${INSTALL[@]}"
   fi
 }
+export -f deb_assert_installed
 
 function deb_installed() {
   for PKG in $@; do
@@ -23,3 +24,4 @@ function deb_installed() {
     fi
   done
 }
+export -f deb_installed

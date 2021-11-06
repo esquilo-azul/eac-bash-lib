@@ -9,6 +9,7 @@ function sudoers_read() {
 
   sudo cat "$1" 2> /dev/null
 }
+export -f sudoers_read
 
 function sudoers_write() {
   if [ $# -lt 1 ]; then
@@ -23,3 +24,4 @@ function sudoers_write() {
   sudo EDITOR='tee' visudo -f "$TARGET_FILE" < "$SOURCE_FILE"
   sudo chmod 440 "$TARGET_FILE"
 }
+export -f sudoers_write

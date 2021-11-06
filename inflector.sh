@@ -9,3 +9,4 @@ function parameterize() {
     printf -- "%s\n" "${RESULT,,}"
   fi
 }
+export -f parameterize
