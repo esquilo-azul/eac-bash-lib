@@ -57,6 +57,6 @@ function fatal_error() {
 export -f fatal_error
 
 function info_ok() {
-  printf "${GREEN}$@${NC}\n"
+  outerr "${GREEN}$@${NC}\n"
 }
 export -f info_ok
