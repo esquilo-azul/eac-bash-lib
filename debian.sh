@@ -10,8 +10,7 @@ function deb_assert_installed() {
   done
 
   if [ ${#INSTALL[@]} -gt 0 ]; then
-    infom "Será necessário instalar os seguintes pacotes debian: $INSTALL"
-    sudo DEBIAN_FRONTEND=noninteractive apt-get -y install "${INSTALL[@]}"
+    apt_get_run install "${INSTALL[@]}"
   fi
 }
 export -f deb_assert_installed
