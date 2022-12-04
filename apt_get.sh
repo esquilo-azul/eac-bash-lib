@@ -20,3 +20,17 @@ function apt_assert_installed() {
   fi
 }
 export -f apt_assert_installed
+
+function apt_assert_uninstalled() {
+  INSTALL=()
+  for PKG in $@; do
+    if deb_installed "$PKG" ; then
+      INSTALL+=("$PKG")
+    fi
+  done
+
+  if [ ${#INSTALL[@]} -gt 0 ]; then
+    apt_get_run purge "${INSTALL[@]}"
+  fi
+}
+export -f apt_assert_uninstalled
