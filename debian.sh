@@ -1,17 +1,9 @@
 set -u
 set -e
 
+# Deprecated: use apt_assert_installed() instead.
 function deb_assert_installed() {
-  INSTALL=()
-  for PKG in $@; do
-    if ! deb_installed "$PKG" ; then
-      INSTALL+=("$PKG")
-    fi
-  done
-
-  if [ ${#INSTALL[@]} -gt 0 ]; then
-    apt_get_run install "${INSTALL[@]}"
-  fi
+  apt_assert_installed "$@"
 }
 export -f deb_assert_installed
 

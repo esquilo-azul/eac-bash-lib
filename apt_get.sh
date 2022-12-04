@@ -6,3 +6,17 @@ function apt_get_run() {
   sudo DEBIAN_FRONTEND=noninteractive apt-get -y "$@"
 }
 export -f apt_get_run
+
+function apt_assert_installed() {
+  INSTALL=()
+  for PKG in $@; do
+    if ! deb_installed "$PKG" ; then
+      INSTALL+=("$PKG")
+    fi
+  done
+
+  if [ ${#INSTALL[@]} -gt 0 ]; then
+    apt_get_run install "${INSTALL[@]}"
+  fi
+}
+export -f apt_assert_installed
