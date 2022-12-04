@@ -7,12 +7,8 @@ function deb_assert_installed() {
 }
 export -f deb_assert_installed
 
+# Deprecated: use dpkg_installed() instead.
 function deb_installed() {
-  for PKG in $@; do
-    RESULT=`dpkg-query -W '-f=${Status}' "$PKG"`
-    if [ "$RESULT" != 'install ok installed' ] ; then
-      return 1
-    fi
-  done
+  dpkg_installed "$@"
 }
 export -f deb_installed

@@ -10,7 +10,7 @@ export -f apt_get_run
 function apt_assert_installed() {
   INSTALL=()
   for PKG in $@; do
-    if ! deb_installed "$PKG" ; then
+    if ! dpkg_installed "$PKG" ; then
       INSTALL+=("$PKG")
     fi
   done
