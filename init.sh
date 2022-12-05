@@ -11,6 +11,7 @@ done
 EACBASHLIB_ROOT="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 source "$EACBASHLIB_ROOT/apt.sh"
+source "$EACBASHLIB_ROOT/asdf.sh"
 source "$EACBASHLIB_ROOT/bool.sh"
 source "$EACBASHLIB_ROOT/cli.sh"
 source "$EACBASHLIB_ROOT/debian.sh"
