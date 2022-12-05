@@ -10,7 +10,7 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 EACBASHLIB_ROOT="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
-source "$EACBASHLIB_ROOT/apt_get.sh"
+source "$EACBASHLIB_ROOT/apt.sh"
 source "$EACBASHLIB_ROOT/bool.sh"
 source "$EACBASHLIB_ROOT/cli.sh"
 source "$EACBASHLIB_ROOT/debian.sh"
