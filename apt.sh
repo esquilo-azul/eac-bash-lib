@@ -16,6 +16,9 @@ function apt_assert_installed() {
   done
 
   if [ ${#INSTALL[@]} -gt 0 ]; then
+    if var_present_r 'APT_GET_UPDATE' && bool_r 'APT_GET_UPDATE'; then
+      apt_get_run update
+    fi
     apt_get_run install "${INSTALL[@]}"
   fi
 }
