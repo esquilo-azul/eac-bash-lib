@@ -4,6 +4,15 @@ set -e
 export DEFAULT_FALSE_VALUE='false'
 export DEFAULT_TRUE_VALUE='true'
 
+function bool_pr() {
+  if var_present_r "$1"; then
+    bool_r "${!1}"
+  else
+    bool_r "${DEFAULT_FALSE_VALUE}"
+  fi
+}
+export -f bool_pr
+
 function bool_r() {
   if [ $# -lt 1 ]; then
     return 1
