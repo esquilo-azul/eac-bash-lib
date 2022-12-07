@@ -34,3 +34,8 @@ function apt_assert_uninstalled() {
   fi
 }
 export -f apt_assert_uninstalled
+
+function apt_update() {
+  apt_get_run update
+}
+export -f apt_update
