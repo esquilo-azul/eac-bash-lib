@@ -1,6 +1,8 @@
 set -u
 set -e
 
+export DEFAULT_FALSE_VALUE='false'
+
 function bool_r() {
   if [ $# -lt 1 ]; then
     return 1
@@ -10,7 +12,7 @@ function bool_r() {
   fi
   INPUT="$(printf -- "$1" | awk '{print tolower($0)}')"
   TRUE_VALUES=(yes y 0 true t)
-  FALSE_VALUES=(no n false f)
+  FALSE_VALUES=(no n "${DEFAULT_FALSE_VALUE}" f)
   for VALUE in "${TRUE_VALUES[@]}"; do
     if [ "$INPUT" == "$VALUE" ]; then
       return 0
