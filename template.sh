@@ -90,17 +90,11 @@ export -f template_dir_apply
 function template_variables() {
   if [ $# -lt 1 ]; then
     error "Usage:\n\ntemplate_variables <TEMPLATE_FILE>" \
-      "\n<TEMPLATE_FILE> should be a file path."
+      "\n<TEMPLATE_FILE> can be a file path or \"-\" (STDIN)\n"
     return 1
   fi
 
-  FILE="$1"
-
-  if [ ! -f "$FILE" ]; then
-    error "\"$FILE\" does not exist or is not a file"
-    return 2
-  fi
-
+  local FILE="$(cli_file_path_or_stdin "$1")"
   PATTERN='[a-zA-Z][a-zA-Z0-9_]*'
   grep '%%'$PATTERN'%%' "$FILE" -o | grep "$PATTERN" -o
 }
