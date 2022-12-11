@@ -1,4 +1,4 @@
-function package_assert_installed() {
+function package_assert() {
   PLUGIN="$1"
   shift
   INSTALL=()
@@ -12,7 +12,7 @@ function package_assert_installed() {
     package_install_multiple "$PLUGIN" "${INSTALL[@]}"
   fi
 }
-export -f package_assert_installed
+export -f package_assert
 
 function package_install_multiple() {
   PLUGIN="$1"
