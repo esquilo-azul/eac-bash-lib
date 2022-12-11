@@ -1,7 +1,8 @@
+# Deprecated: use "package_assert ruby" instead.
 function ruby_gem_install() {
   for GEM in "$@"; do
     if ! ruby_gem_installed "$GEM"; then
-      gem install -V "$GEM"
+      ruby_install_multiple "$GEM"
     fi
   done
 }
