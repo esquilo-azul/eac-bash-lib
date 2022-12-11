@@ -18,20 +18,6 @@ function apt_installed_single() {
 }
 export -f apt_installed_single
 
-function apt_assert_uninstalled() {
-  INSTALL=()
-  for PKG in $@; do
-    if deb_installed "$PKG" ; then
-      INSTALL+=("$PKG")
-    fi
-  done
-
-  if [ ${#INSTALL[@]} -gt 0 ]; then
-    apt_get_run purge "${INSTALL[@]}"
-  fi
-}
-export -f apt_assert_uninstalled
-
 function apt_uninstall_multiple() {
   apt_get_run purge "$@"
 }
