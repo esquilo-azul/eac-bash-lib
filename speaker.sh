@@ -46,6 +46,12 @@ function infov() {
 }
 export -f infov
 
+function infov_compact() {
+  for variable in "$@"; do
+    infov "$variable" "${!variable}"
+  done
+}
+
 # Outputs a error message and exit with error code.
 function fatal_error() {
   set -u
