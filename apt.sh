@@ -24,6 +24,12 @@ function apt_assert_installed() {
 }
 export -f apt_assert_installed
 
+function apt_install_multiple() {
+  apt_get_run update
+  apt_get_run install "$@"
+}
+export -f apt_install_multiple
+
 function apt_installed_single() {
   dpkg_installed "$@"
 }
