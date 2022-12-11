@@ -1,5 +1,6 @@
 export DEFAULT_PIP_COMMAND='pip'
 
+# Deprecated: use "package_assert python" instead.
 function python_assert_installed() {
   INSTALL=()
   for PKG in $@; do
@@ -10,10 +11,15 @@ function python_assert_installed() {
 
   if [ ${#INSTALL[@]} -gt 0 ]; then
     infom "Será necessário instalar os seguintes pacotes Python: $INSTALL"
-    sudo "$(python_pip_command)" install "${INSTALL[@]}"
+    python_install_multiple "$@"
   fi
 }
 export -f python_assert_installed
+
+function python_install_multiple() {
+  sudo "$(python_pip_command)" install "$@"
+}
+export -f python_install_multiple
 
 # Deprecated: use "package_installed python" instead.
 function python_installed() {
