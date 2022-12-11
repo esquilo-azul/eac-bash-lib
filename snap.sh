@@ -3,6 +3,11 @@ set -e
 
 source "$EACBASHLIB_ROOT/bool.sh"
 
+function snap_install_multiple() {
+  sudo snap install --edge "$@"
+}
+export -f snap_install_multiple
+
 function snap_installed() {
   if snap list "$1" > /dev/null 2> /dev/null; then
     bool_s 'TRUE'
@@ -22,7 +27,7 @@ function snap_assert_installed() {
   done
   if [ ${#TO_INSTALL[@]} -ne 0 ]; then
     infom "Installing SNAP packages ${TO_INSTALL[@]}..."
-    sudo snap install --edge "${TO_INSTALL[@]}"
+    snap_install_multiple "${TO_INSTALL[@]}"
     infom "Installed"
   fi
 }
