@@ -1,9 +1,9 @@
 set -u
 set -e
 
-# Deprecated: use apt_assert_installed() instead.
+# Deprecated: use "package_assert apt" instead.
 function deb_assert_installed() {
-  apt_assert_installed "$@"
+  package_assert apt "$@"
 }
 export -f deb_assert_installed
 
