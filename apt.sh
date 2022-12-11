@@ -32,6 +32,11 @@ function apt_assert_uninstalled() {
 }
 export -f apt_assert_uninstalled
 
+function apt_uninstall_multiple() {
+  apt_get_run purge "$@"
+}
+export -f apt_uninstall_multiple
+
 function apt_update() {
   apt_get_run update
 }
