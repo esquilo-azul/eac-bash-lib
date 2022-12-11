@@ -14,6 +14,22 @@ function package_assert() {
 }
 export -f package_assert
 
+function package_assert_uninstalled() {
+  PLUGIN="$1"
+  shift
+  UNINSTALL=()
+  for PKG in $@; do
+    if package_installed "$PLUGIN" "$@"; then
+      UNINSTALL+=("$PKG")
+    fi
+  done
+
+  if [ ${#UNINSTALL[@]} -gt 0 ]; then
+    package_uninstall_multiple "$PLUGIN" "${UNINSTALL[@]}"
+  fi
+}
+export -f package_assert_uninstalled
+
 function package_install_multiple() {
   PLUGIN="$1"
   shift
