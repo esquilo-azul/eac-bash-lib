@@ -36,3 +36,10 @@ function package_installed_single() {
   "${1}_installed_single" "$2"
 }
 export -f package_installed
+
+function package_uninstall_multiple() {
+  PLUGIN="$1"
+  shift
+  "${PLUGIN}_uninstall_multiple" "$@"
+}
+export -f package_uninstall_multiple
