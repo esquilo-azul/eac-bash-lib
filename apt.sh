@@ -24,6 +24,11 @@ function apt_assert_installed() {
 }
 export -f apt_assert_installed
 
+function apt_installed_single() {
+  dpkg_installed "$@"
+}
+export -f apt_installed_single
+
 function apt_assert_uninstalled() {
   INSTALL=()
   for PKG in $@; do
