@@ -2,8 +2,8 @@ function package_assert() {
   PLUGIN="$1"
   shift
   INSTALL=()
-  for PKG in $@; do
-    if ! package_installed "$PLUGIN" "$@"; then
+  for PKG in "$@"; do
+    if ! package_installed "$PLUGIN" "$PKG"; then
       INSTALL+=("$PKG")
     fi
   done
