@@ -51,7 +51,7 @@ export -f package_installed
 function package_installed_single() {
   "${1}_installed_single" "$2"
 }
-export -f package_installed
+export -f package_installed_single
 
 function package_uninstall_multiple() {
   PLUGIN="$1"
