@@ -8,6 +8,11 @@ function snap_install_multiple() {
 }
 export -f snap_install_multiple
 
+function snap_uninstall_multiple() {
+  sudo snap remove "$@"
+}
+export -f snap_install_multiple
+
 # Deprecated: use "package_installed snap" instead.
 function snap_installed() {
   if snap_installed_single "$1"; then
