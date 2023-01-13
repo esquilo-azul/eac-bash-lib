@@ -10,8 +10,16 @@ function apt_get_run() {
 export -f apt_get_run
 
 function apt_install_multiple() {
+  PACKAGES=()
+  for PACKAGE in "$@"; do
+    IFS="$APT_PACKAGE_SOURCE_SEPARATOR" read -ra PARTS <<< "$PACKAGE"
+    if [ ${#PARTS[@]} -ge 2 ]; then
+      sudo add-apt-repository --yes "${PARTS[1]}"
+    fi
+    PACKAGES+=("${PARTS[0]}")
+  done
   apt_get_run update
-  apt_get_run install "$@"
+  apt_get_run install "${PACKAGES[@]}"
 }
 export -f apt_install_multiple
 
