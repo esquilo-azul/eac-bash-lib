@@ -1,6 +1,8 @@
 set -u
 set -e
 
+export APT_PACKAGE_SOURCE_SEPARATOR='@'
+
 function apt_get_run() {
   infom "Running \"apt-get $@\"..."
   sudo DEBIAN_FRONTEND=noninteractive apt-get -y "$@"
@@ -14,7 +16,12 @@ function apt_install_multiple() {
 export -f apt_install_multiple
 
 function apt_installed_single() {
-  dpkg_installed "$@"
+  PACKAGES=()
+  for PACKAGE in "$@"; do
+    IFS="$APT_PACKAGE_SOURCE_SEPARATOR" read -ra PARTS <<< "$PACKAGE"
+    PACKAGES+=("${PARTS[0]}")
+  done
+  dpkg_installed "${PACKAGES[@]}"
 }
 export -f apt_installed_single
 
