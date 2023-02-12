@@ -1,4 +1,3 @@
-source "$EACBASHLIB_ROOT/ruby/gem.sh"
 source "$EACBASHLIB_ROOT/ruby/rvm.sh"
 
 function ruby_install_multiple() {
