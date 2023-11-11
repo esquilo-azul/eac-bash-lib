@@ -6,11 +6,7 @@ function python_install_multiple() {
 export -f python_install_multiple
 
 function python_installed_single() {
-  PACKAGE="$1"
-  RESULT="$("$(python_pip_command)" list | cut -d ' ' -f1 | grep "$PACKAGE")"
-  if [ "$RESULT" != "$PACKAGE" ] ; then
-    return 1
-  fi
+  pip show "$1" > /dev/null
 }
 export -f python_installed_single
 
