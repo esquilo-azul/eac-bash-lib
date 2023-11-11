@@ -1,7 +1,7 @@
 export DEFAULT_PIP_COMMAND='pip'
 
 function python_install_multiple() {
-  sudo "$(python_pip_command)" install "$@"
+  "$(python_pip_command)" install "$@"
 }
 export -f python_install_multiple
 
