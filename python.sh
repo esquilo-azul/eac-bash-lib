@@ -5,16 +5,6 @@ function python_install_multiple() {
 }
 export -f python_install_multiple
 
-# Deprecated: use "package_installed python" instead.
-function python_installed() {
-  for PKG in $@; do
-    if ! python_installed_single "$PKG"; then
-      return 1
-    fi
-  done
-}
-export -f python_installed
-
 function python_installed_single() {
   PACKAGE="$1"
   RESULT="$("$(python_pip_command)" list | cut -d ' ' -f1 | grep "$PACKAGE")"
