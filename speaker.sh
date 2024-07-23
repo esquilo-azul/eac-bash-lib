@@ -18,7 +18,7 @@ function outout() {
     if [ -n "$first" ]; then
       first=''
     else
-      printf -- '%b' ' '
+      printf -- '%b' "$IFS"
     fi
     printf -- '%b' "$value"
   done
