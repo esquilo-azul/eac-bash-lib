@@ -8,20 +8,20 @@ export CYAN='\033[0;36m'
 export NC='\033[0m'
 
 function outerr() {
+  >&2 outout "$@"
+}
+export -f outerr
+
+function outout() {
   local first=1
   for value in "$@"; do
     if [ -n "$first" ]; then
       first=''
     else
-      >&2 outout ' '
+      printf -- '%b' ' '
     fi
-    >&2 outout "$value"
+    printf -- '%b' "$value"
   done
-}
-export -f outerr
-
-function outout() {
-  printf -- '%b' "$1"
 }
 export -f outout
 
