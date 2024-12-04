@@ -1,6 +1,7 @@
 set -u
 set -e
 
+export IWS=' '
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
 export YELLOW='\033[0;93m'
@@ -18,7 +19,7 @@ function outout() {
     if [ -n "$first" ]; then
       first=''
     else
-      printf -- '%b' "$IFS"
+      printf -- '%b' "$IWS"
     fi
     printf -- '%b' "$value"
   done
