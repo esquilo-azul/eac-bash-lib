@@ -1,24 +1,24 @@
 function symlink_assert() {
   infom 'Asserting symlink...'
-  local SOURCE="$1"
-  local TARGET="$2"
-  infov_compact 'SOURCE' 'TARGET'
-  if [ -L "$TARGET" ]; then
-    if [ "$(realpath "$TARGET")" == "$SOURCE" ]; then
-      infom 'Symlink already exist with the correct source.'
+  local TARGET_PATH="$1"
+  local LINK_PATH="$2"
+  infov_compact 'TARGET_PATH' 'LINK_PATH'
+  if [ -L "$LINK_PATH" ]; then
+    if [ "$(realpath "$LINK_PATH")" == "$TARGET_PATH" ]; then
+      infom 'Symlink already exist with the right target.'
       return 0
     else
-      infom 'Target does not point to the source. Removing target...'
-      rm "$TARGET"
+      infom 'Symlink does not point to the target. Removing target...'
+      rm "$LINK_PATH"
     fi
-  elif [ -e "$TARGET" ]; then
-    error 'Target already exists, is not a symlink and because of this cannot be removed.'
+  elif [ -e "$LINK_PATH" ]; then
+    error 'A object in the symlink path already exists, is not a symlink and because of this cannot be removed.'
     return 1
   else
-    infom "Target does not exist."
+    infom "Symlink does not exist."
   fi
   infom 'Creating symlink...'
-  mkdir -p "$(dirname "$TARGET")"
-  ln -s "$SOURCE" "$TARGET"
+  mkdir -p "$(dirname "$LINK_PATH")"
+  ln -s "$TARGET_PATH" "$LINK_PATH"
 }
 export -f symlink_assert
