@@ -3,7 +3,7 @@ function symlink_assert() {
   local LINK_PATH="$1"
   local TARGET_PATH="$2"
   if symlink_exist "$LINK_PATH"; then
-    if [ "$(sudo_run realpath "$LINKPATH")" == "$TARGET" ]; then
+    if symlink_target "$LINK_PATH" "$TARGET_PATH"; then
       infom 'Symlink already exist with the right target.'
       return 0
     else
@@ -26,3 +26,11 @@ function symlink_exist() {
   [[ -L "$1" ]]
 }
 export -f symlink_exist
+
+function symlink_target() {
+  local LINK_PATH="$1"
+  local TARGET_PATH="$2"
+
+  [ "$(sudo_run realpath "$LINK_PATH")" == "$TARGET_PATH" ]
+}
+export -f symlink_target
