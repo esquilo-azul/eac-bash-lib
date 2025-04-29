@@ -1,8 +1,7 @@
 function symlink_assert() {
   infom 'Asserting symlink...'
-  local TARGET_PATH="$1"
-  local LINK_PATH="$2"
-  infov_compact 'TARGET_PATH' 'LINK_PATH'
+  local LINK_PATH="$1"
+  local TARGET_PATH="$2"
   if [ -L "$LINK_PATH" ]; then
     if [ "$(realpath "$LINK_PATH")" == "$TARGET_PATH" ]; then
       infom 'Symlink already exist with the right target.'
