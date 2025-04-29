@@ -1,6 +1,23 @@
 set -u
 set -e
 
+export DEFAULT_SUDO_USE_ENVVAR='SUDO'
+export DEFAULT_SUDO_USE_VALUE="${DEFAULT_FALSE_VALUE}"
+export DEFAULT_SUDO_USER_ENVVAR='SUDO_USER'
+export DEFAULT_SUDO_USER_VALUE=''
+
+function sudo_run() {
+  PRE_COMMAND_ARGS=()
+  if var_present_r "${DEFAULT_SUDO_USER_ENVVAR}"; then
+    PRE_COMMAND_ARGS=(sudo --user "${!DEFAULT_SUDO_USER_ENVVAR}")
+  elif bool_pr "${DEFAULT_SUDO_USE_ENVVAR}"; then
+    PRE_COMMAND_ARGS=(sudo)
+  fi
+
+  "${PRE_COMMAND_ARGS[@]}" "$@"
+}
+export -f sudo_run
+
 function sudoers_read() {
   if [ $# -lt 1 ]; then
     printf "Usage: ${FUNCNAME[0]} <SOURCE_FILE>"
