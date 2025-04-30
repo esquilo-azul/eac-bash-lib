@@ -31,6 +31,6 @@ function symlink_target() {
   local LINK_PATH="$1"
   local TARGET_PATH="$2"
 
-  [ "$(sudo_run realpath "$LINK_PATH")" == "$TARGET_PATH" ]
+  [ "$(sudo_run readlink "$LINK_PATH")" == "$TARGET_PATH" ]
 }
 export -f symlink_target
