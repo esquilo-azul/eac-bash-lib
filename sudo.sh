@@ -6,10 +6,22 @@ export DEFAULT_SUDO_USE_VALUE="${DEFAULT_FALSE_VALUE}"
 export DEFAULT_SUDO_USER_ENVVAR='SUDO_USER'
 export DEFAULT_SUDO_USER_VALUE=''
 
+function sudo_user_r() {
+  [ "$(sudo_user_s)" != '' ]
+}
+
+function sudo_user_s() {
+  if var_present_r "${DEFAULT_SUDO_USER_ENVVAR}"; then
+    outout "${!DEFAULT_SUDO_USER_ENVVAR}\n"
+  else
+    outout ''
+  fi
+}
+
 function sudo_run() {
   PRE_COMMAND_ARGS=()
-  if var_present_r "${DEFAULT_SUDO_USER_ENVVAR}"; then
-    PRE_COMMAND_ARGS=(sudo --user "${!DEFAULT_SUDO_USER_ENVVAR}")
+  if sudo_user_r; then
+    PRE_COMMAND_ARGS=(sudo --user "$(sudo_user_s)")
   elif bool_pr "${DEFAULT_SUDO_USE_ENVVAR}"; then
     PRE_COMMAND_ARGS=(sudo)
   fi
