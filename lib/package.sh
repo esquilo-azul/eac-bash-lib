@@ -19,7 +19,7 @@ function package_assert_uninstalled() {
   shift
   UNINSTALL=()
   for PKG in $@; do
-    if package_installed "$PLUGIN" "$@"; then
+    if package_installed "$PLUGIN" "$PKG"; then
       UNINSTALL+=("$PKG")
     fi
   done
