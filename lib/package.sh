@@ -48,6 +48,17 @@ function package_installed() {
 }
 export -f package_installed
 
+function package_uninstalled() {
+  PLUGIN="$1"
+  shift
+  for PKG in $@; do
+    if package_installed_single "$PLUGIN" "$PKG"; then
+      return 1
+    fi
+  done
+}
+export -f package_uninstalled
+
 function package_installed_single() {
   "${1}_installed_single" "$2"
 }
