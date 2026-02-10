@@ -13,6 +13,11 @@ function outerr() {
 }
 export -f outerr
 
+function outerr_nl() {
+  outerr "$@" "\n"
+}
+export -f outerr_nl
+
 function outout() {
   local first=1
   for value in "$@"; do
