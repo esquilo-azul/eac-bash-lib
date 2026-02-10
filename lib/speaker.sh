@@ -31,6 +31,11 @@ function outout() {
 }
 export -f outout
 
+function outout_nl() {
+  outout "$@" "\n"
+}
+export -f outout_nl
+
 # Outputs a error message.
 function error() {
   outerr "${RED}Error: ${NC}"
