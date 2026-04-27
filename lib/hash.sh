@@ -1,6 +1,3 @@
-set -u
-set -e
-
 export HASH_PAIR_SEP='|'
 export HASH_KV_SEP=':'
 

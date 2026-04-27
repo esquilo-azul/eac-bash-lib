@@ -1,6 +1,3 @@
-set -u
-set -e
-
 function var_blank_r() {
   if var_present_r "$1"; then
     return 1
