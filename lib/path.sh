@@ -17,3 +17,10 @@ function path_expand() {
   fi
 }
 export -f path_expand
+
+function path_extension() {
+  local THE_PATH="$1"
+  local BASE="${THE_PATH##*/}"
+  outout "${BASE##*.}"
+}
+export -f path_extension
