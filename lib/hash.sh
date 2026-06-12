@@ -61,6 +61,19 @@ function hash_get() {
 }
 export -f hash_get
 
+# hash_get <HASH> <KEY> [<DEFAULT>='']
+# Outputs the value found in <HASH>[<KEY>] or <DEFAULT>.
+function hash_get_or_default() {
+  local HASH="$1"
+  local KEY="$2"
+  var_set_by DEFAULT cli_arg 3 '' "$@"
+
+  if ! hash_get "${HASH}" "${KEY}"; then
+    outout "$DEFAULT"
+  fi
+}
+export -f hash_get_or_default
+
 # hash_init <HASH>
 function hash_init() {
   export "$1"=''
