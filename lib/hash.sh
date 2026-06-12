@@ -1,6 +1,14 @@
 export HASH_PAIR_SEP='|'
 export HASH_KV_SEP=':'
 
+function hash_assert() {
+  local HASH="$1"
+  if [[ ! -v "${HASH}" ]]; then
+    hash_init "${HASH}"
+  fi
+}
+export -f hash_assert
+
 # hash_delete <HASH> <KEY>
 function hash_delete() {
   local HASH="$1"
