@@ -1,3 +1,10 @@
+function basename_without_extension() {
+  local THE_PATH="$1"
+  var_set_by BASENAME basename "$THE_PATH"
+  path_without_extension "${BASENAME}"
+}
+export -f basename_without_extension
+
 function file_mime_type() {
   file --mime-type --brief "$@"
 }
