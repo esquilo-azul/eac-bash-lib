@@ -24,3 +24,9 @@ function path_extension() {
   outout "${BASE##*.}"
 }
 export -f path_extension
+
+function path_without_extension() {
+  local THE_PATH="$1"
+  outout "${THE_PATH%.*}"
+}
+export -f path_without_extension
