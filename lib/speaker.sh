@@ -63,9 +63,6 @@ export -f infov_compact
 
 # Outputs a error message and exit with error code.
 function fatal_error() {
-
-
-
   error "$@"
   exit 1
 }
