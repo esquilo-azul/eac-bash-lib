@@ -8,6 +8,19 @@ function pathvar_assert() {
 }
 export -f pathvar_assert
 
+function pathvar_find_file() {
+  local PATHVAR="$1"
+  local FILE_SUBPATH_PATTERN="$2"
+
+  while read -r FOUND_FILE; do
+    outout "$FOUND_FILE"
+    return 0
+  done < <(pathvar_find_files "${PATHVAR}" "${FILE_SUBPATH_PATTERN}")
+
+  return 1
+}
+export -f pathvar_find_file
+
 function pathvar_find_files() {
   local PATHVAR="$1"
   local FILE_SUBPATH_PATTERN="$2"
