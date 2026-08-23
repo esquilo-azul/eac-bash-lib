@@ -22,15 +22,22 @@ function pathvar_find_file() {
 export -f pathvar_find_file
 
 function pathvar_find_files() {
+  pathvar_find_multiple "$1" "$2" -type f
+}
+export -f pathvar_find_files
+
+function pathvar_find_multiple() {
   local PATHVAR="$1"
   local FILE_SUBPATH_PATTERN="$2"
+  shift
+  shift
 
   while read -r NODE; do
     [ -d "$NODE" ] || continue
-    find "${NODE}" -type f -path "${NODE}/${FILE_SUBPATH_PATTERN}" 2>/dev/null
+    find "${NODE}" "$@" -path "${NODE}/${FILE_SUBPATH_PATTERN}" 2>/dev/null
   done < <(pathvar_to_lines "${PATHVAR}")
 }
-export -f pathvar_find_files
+export -f pathvar_find_multiple
 
 function pathvar_join() {
   local ACUM=''
