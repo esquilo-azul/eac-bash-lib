@@ -33,6 +33,13 @@ function ruby_installed_single() {
 }
 export -f ruby_installed_single
 
+function ruby_uninstall_multiple() {
+  for PACKAGE in "$@"; do
+    ruby_uninstall_single "$PACKAGE"
+  done
+}
+export -f ruby_uninstall_multiple
+
 function ruby_uninstall_single() {
   IFS="$RUBY_PACKAGE_SOURCE_SEPARATOR" read -ra PARTS <<< "${1}"
   if [ ${#PARTS[@]} -ge 2 ]; then
